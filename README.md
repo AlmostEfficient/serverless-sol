@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Serverless function to send SOL to a given address. 
 
 ## Getting Started
 
@@ -16,21 +16,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Serverless functions are located in the `pages/api` directory.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Create a `.env` file and add your raw secret key byte array, like this:
+  
+  ```bash
+  SOLANA_SECRET_KEY=183,31,32,44
+  ```
 
-## Learn More
+Your actual array will be much longer, obviously.
 
-To learn more about Next.js, take a look at the following resources:
+## Adding a new function
+Create a new file in the `pages/api` directory. The name of the file will be the name of the function. Anything that you can do in a regular Node.js script or React app, you can do in this function. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Serverless vs Edge
+Serverless functions are run on-demand, expect a cold start time of 1-2 seconds. This makes them cheaper. Edge functions are better suited to high-traffic applications, but are more expensive. Unless you NEED your transaction to complete in under 1s, use serverless functions.
